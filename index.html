@@ -8,8 +8,10 @@
 </head>
 <body>
 
-<!-- main icons -->
+<!-- DESKTOP CONTAINER (Everything goes inside here) -->
 <div id="desktop">
+
+    <!-- Desktop Icons -->
     <div class="icon">
         <img src="assets/icons/mycomputer.png" alt="My Computer">
         <span>My Computer</span>
@@ -22,48 +24,48 @@
         <img src="assets/icons/mydocuments.png" alt="My Documents">
         <span>My Documents</span>
     </div>
-</div>
 
-<header>
-    <h1>My Portfolio</h1>
-    <p>Welcome to my personal portfolio website</p>
-</header>
+    <!-- Header -->
+    <header>
+        <h1>My Portfolio</h1>
+        <p>Welcome to my personal portfolio website</p>
+    </header>
 
-<!--Here is the main -->
-<main>
-    <!--Here we will make sections -->
-    <section>
-        <h2>Projets</h2>
-        <p>List of my work..</p>
+    <!-- Main Content -->
+    <main>
+        <section>
+            <h2>Projets</h2>
+            <p>List of my work..</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Balrampreet</p>
+    </footer>
+
+    <!-- Start Menu (Hidden) -->
+    <section id="startmenu">
+        <h2>Start Menu</h2>
+        <p>Welcome to the Start Menu section!</p>
+        <p>This is where your applications would be listed.</p>
     </section>
-</main>
 
-<footer>
-    <p>© 2026 Balrampreet</p>
-</footer>
+</div> <!-- End of #desktop -->
 
-<!-- Taskbar with Start button AND Start link -->
+<!-- TASKBAR (Outside desktop, fixed at bottom) -->
 <div class="taskbar">
     <section>
         <p>start menu</p>
         
-        <!-- Your existing Start button -->
         <button>
             <img src="assets/images/window_logo.png" alt="windows logo">
             Start
         </button>
         
-        <!-- NEW: The "Start" link that points to #startmenu -->
         <a href="#startmenu">Start</a>
     </section>
 </div>
-
-<!-- NEW: The destination section for the link -->
-<section id="startmenu">
-    <h2>Start Menu</h2>
-    <p>Welcome to the Start Menu section!</p>
-    <p>This is where your applications would be listed.</p>
-</section>
 
 </body>
 </html>
