@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>My Portfolio</title>
-        <link rel="icon" type="image/svg+xml" href="assets/icons/fav.svg">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icons/fav.svg">
+</head>
 <body>
 
-
+<!-- main icons -->
+<div id="desktop">
+    <div class="icon">My Computer</div>
+    <div class="icon">Recycle Bin</div>
+    <div class="icon">MY Documents</div>
+</div>
 
 <header>
     <h1>My Portfolio</h1>
     <p>Welcome to my personal portfolio website</p>
 </header>
 
-
 <!--Here is the main -->
 <main>
-<!--Here we will make sections -->
-<section>
-    <h2>Projets</h2>
-    <p>List of my work.. </p>
-</section>
+    <!--Here we will make sections -->
+    <section>
+        <h2>Projets</h2>
+        <p>List of my work..</p>
+    </section>
 </main>
-
 
 <footer>
     <p>© 2026 Balrampreet</p>
 </footer>
 
+<!-- Taskbar with Start button AND Start link -->
+<div class="taskbar">
+    <section>
+        <p>start menu</p>
+        
+        <!-- Your existing Start button -->
+        <button>
+            <img src="assets/images/window_logo.png" alt="windows logo">
+            Start
+        </button>
+        
+        <!-- NEW: The "Start" link that points to #startmenu -->
+        <a href="#startmenu">Start</a>
+    </section>
+</div>
 
-
-
-
-
-
-
+<!-- NEW: The destination section for the link -->
+<section id="startmenu">
+    <h2>Start Menu</h2>
+    <p>Welcome to the Start Menu section!</p>
+    <p>This is where your applications would be listed.</p>
+</section>
 
 </body>
-
-
 </html>
