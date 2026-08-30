@@ -1,0 +1,7 @@
+#desktop{
+    background-image: url('assets/wallpaper/wallpaper.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    background-color: #245edc;
+}
