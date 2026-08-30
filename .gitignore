@@ -1,0 +1,12 @@
+#agesnts
+AGENTS.md
+
+#envirnonment (atleast not for now)
+.env
+.env*
+
+#logs
+*.log
+
+#node modules
+node_modules/
