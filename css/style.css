@@ -56,62 +56,21 @@ body{
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); /* ← NEW: better readability */
 }
 
-/* ========================================
-   HEADER, MAIN, FOOTER (NEW STYLES)
-   ======================================== */
 
-header, main, footer {
-    position: relative;
-    display: block;
-    width: 100%;        /* ← NEW */
-    z-index: 1;         /* ← NEW */
-}
-
-/* Header */
-header {
-    background: rgba(0, 0, 0, 0.6);
+#startbutton{
     color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    display:flex;
+    height: 40%;
+    
+}
+.taskbar{
+    display:flex;
+    flex-direction:row;
+    gap:10px;
+    position:fixed;
+    bottom:0;
+
 }
 
-header h1 {
-    font-size: 20px;
-    margin: 0;
-}
-
-header p {
-    font-size: 14px;
-    opacity: 0.8;
-    margin: 5px 0 0 0;
-}
-
-/* Main Content */
-main {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 10px;
-    max-width: 800px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-main h2 {
-    color: #333;
-    margin-top: 0;
-}
-
-main p {
-    color: #555;
-    line-height: 1.6;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    color: white;
-    padding: 20px 0;
-    margin-top: auto;      /* Pushes footer to bottom */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-}
