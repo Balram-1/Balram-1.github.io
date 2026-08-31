@@ -185,3 +185,25 @@ body{
   width: 100%;
   height: calc(100vh - 50px); /* subtract taskbar height */
 }
+
+.window.minimized{
+    display: none;
+}
+
+.taskbar-apps {
+  display: flex;
+  gap: 6px;
+  flex: 1; /* take available space */
+}
+
+.taskbar-button {
+  background: #d4d0c8;
+  border: 2px solid #808080;
+  padding: 4px 12px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  cursor: pointer;
+}
+
+.taskbar-button:hover {
+  background: #c0c0c0;
+}

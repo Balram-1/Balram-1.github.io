@@ -1,104 +1,105 @@
 console.log("javascript connected");
-const clockElement=document.querySelector(".taskbar-clock");
 
-function updateClock(){
+// CLOCK
+const clockElement = document.querySelector(".taskbar-clock");
+
+function updateClock() {
     const now = new Date();
-    
-
     let hours = now.getHours();
     let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-    let ampm ;
-    //convert to 12 h format
-    if(hours >= 12){
-        ampm='PM';
-    } else{
-        ampm='AM';
-    }
+    let ampm = hours >= 12 ? "PM" : "AM";
 
-    //convert 24h to 12h format
-    hours= hours % 12;
-    if(hours === 0){
-        hours = 12;
-    }
-    if(minutes < 10){
-        minutes='0' + minutes;
-    }
+    hours = hours % 12 || 12;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
 
-    //final string
-    const timeString =  hours+":"+minutes+" "+ampm;
-
-    //logging
-    clockElement.textContent=timeString;
-
-
+    clockElement.textContent = hours + ":" + minutes + " " + ampm;
 }
 
-setInterval(updateClock,1000);
+updateClock(); // immediate update
+setInterval(updateClock, 1000);
 
-const icons=document.querySelectorAll(".icon");
-console.log(icons);
-console.log(icons.length);
-
-for(const icon of icons ){
-    icon.addEventListener("click",handleIconClick);
-
-}
-function handleIconClick(event) {
-    const clickedIcon = event.currentTarget;
-
-    // Step 1: remove "selected" from ALL icons
-    for (const icon of icons) {
-        icon.classList.remove("selected");
-    }
-
-    // Step 2: add "selected" to the clicked one
-    clickedIcon.classList.add("selected");
-
-    // Step 3: log which one was clicked
-    const label = clickedIcon.querySelector("span").textContent;
-    console.log(label + " clicked");
-}
+// ICONS
+const icons = document.querySelectorAll(".icon");
 
 for (const icon of icons) {
+    icon.addEventListener("click", handleIconClick);
     icon.addEventListener("dblclick", handleIconDblClick);
 }
 
-function handleIconDblClick(event) {
-    const dblClickedIcon = event.currentTarget;
-    const label = dblClickedIcon.querySelector("span").textContent;
-    console.log(label + " opened");
+function handleIconClick(event) {
+    const clickedIcon = event.currentTarget;
+    for (const icon of icons) icon.classList.remove("selected");
+    clickedIcon.classList.add("selected");
+
+    const label = clickedIcon.querySelector("span").textContent.trim();
+    console.log(label + " clicked");
 }
 
-
-// Grab the My Computer window once at the top
+// WINDOWS
 const myComputerWindow = document.querySelector("#mycomputer-window");
 
 function handleIconDblClick(event) {
     const dblClickedIcon = event.currentTarget;
-    const label = dblClickedIcon.querySelector("span").textContent;
-
+    const label = dblClickedIcon.querySelector("span").textContent.trim();
     console.log(label + " opened");
 
-    // Only open My Computer window for now
     if (label === "My Computer") {
         myComputerWindow.classList.add("open");
+        // Create taskbar button if not already present
+        if (!myComputerTaskbarButton) {
+            myComputerTaskbarButton = createTaskbarButton("My Computer");
+        }
     }
 }
 
-// Select the close button inside the My Computer window
+// CONTROLS
 const closeButton = myComputerWindow.querySelector(".close");
-
-// Wire up the click event
-closeButton.addEventListener("click", function() {
-    myComputerWindow.classList.remove("open");
+closeButton.addEventListener("click", () => {
+    myComputerWindow.classList.remove("open", "maximized", "minimized");
     console.log("My Computer closed");
+
+    if (myComputerTaskbarButton) {
+        myComputerTaskbarButton.remove();
+        myComputerTaskbarButton = null;
+    }
 });
 
-
 const maximizeButton = myComputerWindow.querySelector(".maximize");
-
-maximizeButton.addEventListener("click",function(){
+maximizeButton.addEventListener("click", () => {
     myComputerWindow.classList.toggle("maximized");
-    console.log("My computer maximized toggled");
-})
+    if (myComputerWindow.classList.contains("maximized")) {
+        console.log("My Computer maximized");
+    } else {
+        console.log("My Computer restored");
+    }
+});
+
+const minimizeButton = myComputerWindow.querySelector(".minimize");
+const taskbarApps = document.querySelector(".taskbar-apps");
+
+function createTaskbarButton(label) {
+    const btn = document.createElement("button");
+    btn.textContent = label;
+    btn.classList.add("taskbar-button");
+
+    // Restore window when clicked
+    btn.addEventListener("click", () => {
+        myComputerWindow.classList.remove("minimized");
+        myComputerWindow.classList.add("open");
+        console.log(label + " restored from taskbar");
+    });
+
+    taskbarApps.appendChild(btn);
+    return btn;
+}
+
+let myComputerTaskbarButton = null;
+
+minimizeButton.addEventListener("click", () => {
+    myComputerWindow.classList.add("minimized");
+    console.log("My Computer minimized");
+
+    if (!myComputerTaskbarButton) {
+        myComputerTaskbarButton = createTaskbarButton("My Computer");
+    }
+});
