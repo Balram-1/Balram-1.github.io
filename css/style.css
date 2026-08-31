@@ -127,4 +127,9 @@ body{
 }
 
 
+.icon.selected {
+    
+    background-color: #cce5ff;
+    border-radius: 5px;
+}
 
