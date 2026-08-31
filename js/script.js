@@ -279,6 +279,54 @@ function attachFocusHandler(windowElement) {
 }
 
 
+
+
+
+
+
+function attachDragHandler(windowElement) {
+    const titlebar = windowElement.querySelector(".titlebar");
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    titlebar.addEventListener("mousedown", (event) => {
+        if (windowElement.classList.contains("maximized")) {
+            return; // don’t drag maximized windows
+        }
+
+        isDragging = true;
+        offsetX = event.clientX - windowElement.offsetLeft;
+        offsetY = event.clientY - windowElement.offsetTop;
+
+        bringWindowToFront(windowElement);
+    });
+
+    document.addEventListener("mousemove", (event) => {
+        if (!isDragging) return;
+
+        let newLeft = event.clientX - offsetX;
+        let newTop = event.clientY - offsetY;
+
+        const maxLeft = window.innerWidth - windowElement.offsetWidth;
+        const taskbarHeight = 50;
+        const maxTop = window.innerHeight - windowElement.offsetHeight - taskbarHeight;
+
+        newLeft = Math.min(maxLeft, Math.max(0, newLeft));
+        newTop = Math.min(maxTop, Math.max(0, newTop));
+
+        windowElement.style.left = newLeft + "px";
+        windowElement.style.top = newTop + "px";
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+    });
+}
+
+
+
 // ============================================================
 // INITIALIZE MY COMPUTER
 // ============================================================
@@ -315,3 +363,6 @@ attachMinimizeHandler(
 );
 
 attachFocusHandler(networkWindow);
+
+attachDragHandler(myComputerWindow);
+attachDragHandler(networkWindow);
