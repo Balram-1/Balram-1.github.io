@@ -71,5 +71,27 @@ function handleIconDblClick(event) {
 }
 
 
-console.log("here u go ");
-console.log(icon.classList);
+// Grab the My Computer window once at the top
+const myComputerWindow = document.querySelector("#mycomputer-window");
+
+function handleIconDblClick(event) {
+    const dblClickedIcon = event.currentTarget;
+    const label = dblClickedIcon.querySelector("span").textContent;
+
+    console.log(label + " opened");
+
+    // Only open My Computer window for now
+    if (label === "My Computer") {
+        myComputerWindow.classList.add("open");
+    }
+}
+
+// Select the close button inside the My Computer window
+const closeButton = myComputerWindow.querySelector(".close");
+
+// Wire up the click event
+closeButton.addEventListener("click", function() {
+    myComputerWindow.classList.remove("open");
+    console.log("My Computer closed");
+});
+
