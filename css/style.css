@@ -133,3 +133,49 @@ body{
     border-radius: 5px;
 }
 
+
+.window{
+    position:absolute;
+    top:110px;
+    left:70px;
+    width:500px;
+    height:300px;
+    border: 2px solid #000;
+    background-color: white;
+    z-index: 10;
+    display: none;
+}
+.window.open{
+    display: block;
+}
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0055aa;
+  color: white;
+  height: 30px;
+  padding: 0 5px;
+}
+
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.titlebar-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.titlebar-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.window-content {
+  padding: 10px;
+  background-color: white;
+  height: calc(100% - 30px);
+}

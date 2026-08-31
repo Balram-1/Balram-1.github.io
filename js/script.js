@@ -60,5 +60,16 @@ function handleIconClick(event) {
     console.log(label + " clicked");
 }
 
+for (const icon of icons) {
+    icon.addEventListener("dblclick", handleIconDblClick);
+}
+
+function handleIconDblClick(event) {
+    const dblClickedIcon = event.currentTarget;
+    const label = dblClickedIcon.querySelector("span").textContent;
+    console.log(label + " opened");
+}
+
+
 console.log("here u go ");
 console.log(icon.classList);
