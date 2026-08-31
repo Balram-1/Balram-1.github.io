@@ -326,43 +326,69 @@ function attachDragHandler(windowElement) {
 }
 
 
+function attachTitlebarDoubleClickHandler(windowElement) {
+    const titlebar = windowElement.querySelector(".titlebar");
+
+    titlebar.addEventListener("dblclick", () => {
+        windowElement.classList.toggle("maximized");
+
+        bringWindowToFront(windowElement);
+
+        if (windowElement.classList.contains("maximized")) {
+            console.log(windowElement.id + " maximized");
+        } else {
+            console.log(windowElement.id + " restored");
+        }
+    });
+}
+
+
 
 // ============================================================
-// INITIALIZE MY COMPUTER
+// GENERIC WINDOW INITIALIZATION
 // ============================================================
 
+function initializeWindow(windowElement, label) {
+
+    // Close button
+    attachCloseHandler(windowElement);
+
+    // Maximize button
+    attachMaximizeHandler(windowElement);
+
+    // Minimize button
+    attachMinimizeHandler(windowElement, label);
+
+    // Bring window to front when clicked
+    attachFocusHandler(windowElement);
+
+    // Make window draggable
+    attachDragHandler(windowElement);
+
+    // Double-click titlebar to maximize/restore
+    attachTitlebarDoubleClickHandler(windowElement);
+}
+
+
+// ============================================================
+// INITIALIZE WINDOWS
+// ============================================================
+
+// My Computer
 const myComputerWindow =
     document.querySelector("#mycomputer-window");
 
-attachCloseHandler(myComputerWindow);
-
-attachMaximizeHandler(myComputerWindow);
-
-attachMinimizeHandler(
+initializeWindow(
     myComputerWindow,
     "My Computer"
 );
 
-attachFocusHandler(myComputerWindow);
 
-
-// ============================================================
-// INITIALIZE NETWORK
-// ============================================================
-
+// Network
 const networkWindow =
     document.querySelector("#network-window");
 
-attachCloseHandler(networkWindow);
-
-attachMaximizeHandler(networkWindow);
-
-attachMinimizeHandler(
+initializeWindow(
     networkWindow,
     "Network"
 );
-
-attachFocusHandler(networkWindow);
-
-attachDragHandler(myComputerWindow);
-attachDragHandler(networkWindow);
