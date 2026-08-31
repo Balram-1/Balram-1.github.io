@@ -179,3 +179,9 @@ body{
   background-color: white;
   height: calc(100% - 30px);
 }
+.window.maximized {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 50px); /* subtract taskbar height */
+}

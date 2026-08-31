@@ -95,3 +95,10 @@ closeButton.addEventListener("click", function() {
     console.log("My Computer closed");
 });
 
+
+const maximizeButton = myComputerWindow.querySelector(".maximize");
+
+maximizeButton.addEventListener("click",function(){
+    myComputerWindow.classList.toggle("maximized");
+    console.log("My computer maximized toggled");
+})
