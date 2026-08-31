@@ -11,59 +11,73 @@
 <!-- DESKTOP CONTAINER (Everything goes inside here) -->
 <div id="desktop">
 
+    <!-- My Computer Window -->
+    <div class="window" id="mycomputer-window">
+        <div class="titlebar">
+            <div class="titlebar-left">
+                <img src="assets/icons/mycomputer.png" alt="My Computer Icon" class="titlebar-icon">
+                <span class="titlebar-title">My Computer</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">X</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <h2>My Computer</h2>
+            <p>Your information here</p>
+        </div>
+    </div> <!-- ✅ Closed My Computer window -->
+
+    <!-- Network Window -->
+    <div class="window" id="network-window">
+        <div class="titlebar">
+            <div class="titlebar-left">
+                <img src="assets/icons/network.avif" alt="Network Icon" class="titlebar-icon">
+                <span class="titlebar-title">Network</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">X</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <h2>Network</h2>
+            <p>Network information here</p>
+        </div>
+    </div>
+
     <!-- Desktop Icons -->
-<!-- My Computer Window -->
-<div class="window" id="mycomputer-window">
-
-    <!-- Title Bar -->
-    <div class="titlebar">
-        <div class="titlebar-left">
-            <img src="assets/icons/mycomputer.png" alt="My Computer Icon" class="titlebar-icon">
-            <span class="titlebar-title">My Computer</span>
-        </div>
-        <div class="titlebar-buttons">
-            <button class="minimize">_</button>
-            <button class="maximize">□</button>
-            <button class="close">X</button>
-        </div>
+    <div class="icon" data-app="mycomputer">
+        <img src="assets/icons/mycomputer.png" alt="My Computer">
+        <span>My Computer</span>
     </div>
 
-    <!-- Content Area -->
-    <div class="window-content">
-        <h2>My Computer</h2>
-        <p>Your information here</p>
-    </div>
-
-</div>
-<div class="icon">
-    <img src="assets/icons/mycomputer.png" alt="My Computer">
-    <span>My Computer</span>
-</div>
-
-
-    <div class="icon">
+    <div class="icon" data-app="network">
         <img src="assets/icons/network.avif" alt="Network">
         <span>Network</span>
     </div>
-    
-    <div class="icon">
+
+    <div class="icon" data-app="projects">
         <img src="assets/icons/mydocuments.png" alt="My Project">
         <span>My Projects</span>
     </div>
-    <div class="icon">
+
+    <div class="icon" data-app="cmd">
         <img src="assets/icons/cmd.avif" alt="CLI">
         <span>Cmd</span>
     </div>
-    <div class="icon">
+
+    <div class="icon" data-app="guestbook">
         <img src="assets/icons/guestbook.avif" alt="guestbook">
         <span>Guestbook</span>
     </div>
 
+</div> <!-- ✅ Closed desktop container -->
 
-
-  
-
-
+<!-- Taskbar -->
 <div class="taskbar">
     <!-- Start Button -->
     <div id="startbutton">
@@ -73,14 +87,13 @@
 
     <div class="taskbar-apps"></div>
 
-   
-
     <!-- Clock -->
     <div class="taskbar-clock">
         12:21 AM
     </div>
 </div>
-<script src="js/script.js"></script>
 
+<script src="js/script.js"></script>
 </body>
+
 </html>
