@@ -173,7 +173,8 @@ function attachCloseHandler(windowElement) {
         windowElement.querySelector(".close");
 
 
-    closeButton.addEventListener("click", () => {
+    closeButton.addEventListener("click", (event) => {
+        event.stopPropagation();
 
         // Remove every window state
         windowElement.classList.remove(
@@ -205,7 +206,8 @@ function attachCloseHandler(windowElement) {
 function attachMaximizeHandler(windowElement) {
     const maximizeButton = windowElement.querySelector(".maximize");
 
-    maximizeButton.addEventListener("click", () => {
+    maximizeButton.addEventListener("click", (event) => {
+        event.stopPropagation(); // stop bubbling
         toggleMaximize(windowElement);
     });
 }
@@ -221,7 +223,8 @@ function attachMinimizeHandler(windowElement, label) {
         windowElement.querySelector(".minimize");
 
 
-    minimizeButton.addEventListener("click", () => {
+    minimizeButton.addEventListener("click", (event) => {
+        event.stopPropagation();
 
         windowElement.classList.add("minimized");
 
