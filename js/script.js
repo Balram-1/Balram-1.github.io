@@ -1,7 +1,19 @@
 console.log("javascript connected");
 
-
 // ============================================================
+// STARTUP SCREEN
+// ============================================================
+window.addEventListener("load", () => {
+    const startup = document.getElementById("startup-screen");
+    if (startup) {
+        setTimeout(() => {
+            startup.classList.add("fade-out");
+            setTimeout(() => {
+                startup.classList.add("hidden");
+            }, 500); // match CSS transition duration
+        }, 2500); // 2.5 seconds loading
+    }
+});// ============================================================
 // GLOBAL WINDOW Z-INDEX
 // ============================================================
 
@@ -10,6 +22,18 @@ let topZIndex = 10;
 function bringWindowToFront(windowElement) {
     topZIndex++;
     windowElement.style.zIndex = topZIndex;
+
+    // Remove active-window class from all windows
+    document.querySelectorAll('.window').forEach(win => win.classList.remove('active-window'));
+    // Add active-window class to this window
+    windowElement.classList.add('active-window');
+
+    // Remove active state from all taskbar buttons
+    document.querySelectorAll('.taskbar-button').forEach(btn => btn.classList.remove('taskbar-button-active'));
+    // Add active state to this window's taskbar button
+    if (windowElement.taskbarButton) {
+        windowElement.taskbarButton.classList.add('taskbar-button-active');
+    }
 }
 
 
@@ -72,11 +96,59 @@ function handleIconClick(event) {
 
 
 // ============================================================
+// START MENU & SHUTDOWN
+// ============================================================
+const startButton = document.getElementById("startbutton");
+const startMenu = document.getElementById("start-menu");
+const shutdownScreen = document.getElementById("shutdown-screen");
+const shutdownText = document.getElementById("shutdown-text");
+
+if (startButton && startMenu) {
+    startButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        startMenu.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!startMenu.contains(e.target) && !startButton.contains(e.target)) {
+            startMenu.classList.add("hidden");
+        }
+    });
+
+    // Start menu items
+    document.querySelectorAll(".start-menu-item").forEach(item => {
+        item.addEventListener("click", () => {
+            startMenu.classList.add("hidden"); // close menu
+            const app = item.dataset.app;
+            if (app) {
+                const windowSelector = `#${app}-window`;
+                const windowElement = document.querySelector(windowSelector);
+                if (windowElement) {
+                    windowElement.classList.remove("minimized");
+                    windowElement.classList.add("open");
+                    bringWindowToFront(windowElement);
+                    if (!windowElement.taskbarButton) {
+                        const label = item.querySelector("span").textContent.trim();
+                        windowElement.taskbarButton = createTaskbarButton(label, windowElement);
+                    }
+                }
+            } else if (item.id === "start-shutdown") {
+                // Initiate shutdown sequence
+                document.querySelectorAll(".window").forEach(w => w.classList.remove("open"));
+                shutdownScreen.classList.remove("hidden");
+                setTimeout(() => {
+                    shutdownText.textContent = "It is now safe to close this tab.";
+                }, 2000);
+            }
+        });
+    });
+}
+
+// ============================================================
 // TASKBAR
 // ============================================================
 
 const taskbarApps = document.querySelector(".taskbar-apps");
-
 
 function createTaskbarButton(label, windowElement) {
 
@@ -406,16 +478,14 @@ const cmdWindow =
 initializeWindow(cmdWindow, "Command Prompt");
 
 //Guestbook
-const guestbookWindow =
-    document.querySelector("#guestbook-window");
+const guestbookWindow = document.querySelector("#guestbook-window");
+if (guestbookWindow) initializeWindow(guestbookWindow, "Guestbook");
 
-initializeWindow(
-    guestbookWindow,
-    "Guestbook"
-);
-
-
-
+// CTF Vault
+/*
+const ctfvaultWindow = document.querySelector("#ctfvault-window");
+if (ctfvaultWindow) initializeWindow(ctfvaultWindow, "CTF Vault");
+*/
 // ============================================================
 // PROJECT TABS
 // ============================================================
@@ -504,12 +574,72 @@ function handleSkills() {
 function handleContact() {
     printTerminal("Contact:");
     printTerminal("  GitHub: https://github.com/Balram-1");
-    printTerminal("  Email: your-email@example.com");
-    printTerminal("  LinkedIn: https://www.linkedin.com/in/your-profile");
+    printTerminal("  Email: balrampreet@tutamail.com");
+    printTerminal("  LinkedIn: https://www.linkedin.com/in/balrampreet/");
+}
+
+function handleWhoami() { printTerminal("balrampreet — cybersecurity student, ctf player, builder"); }
+function handlePwd() { printTerminal("C:\\Users\\Balram"); }
+function handleDate() { printTerminal(new Date().toString()); }
+function handleSudo() { printTerminal("Nice try."); }
+function handleHack() { printTerminal("Initiating hack... just kidding."); }
+function handleLs() {
+    printTerminal(" Directory of C:\\Users\\Balram\n");
+    printTerminal("[DIR]  Desktop");
+    printTerminal("[DIR]  Projects");
+    printTerminal("[DIR]  CTF_Vault");
+    printTerminal("[DIR]  Downloads");
+    printTerminal("       stegolab.py        4,192 bytes");
+    printTerminal("       notes.txt          1,337 bytes");
+    printTerminal("       classified.exe     ACCESS DENIED");
+}
+function handleNeofetch() {
+    printTerminal("        ██████");
+    printTerminal("      ██░░░░░░██          balrampreet@BALRAM-PC");
+    printTerminal("    ██░░░░░░░░░░██        ─────────────────────");
+    printTerminal("    ██░░░░░░░░░░██        OS: Windows XP Professional");
+    printTerminal("    ██░░░░░░░░░░██        Shell: cmd.exe");
+    printTerminal("    ██░░░░░░░░░░██        Role: Cybersecurity Student");
+    printTerminal("      ██░░░░░░██          Focus: Offensive · Network · CTF");
+    printTerminal("        ██████            GitHub: github.com/Balram-1");
+    printTerminal("                          Email: balrampreet@tutamail.com");
+}
+function handleHistory() {
+    if (commandHistory.length === 0) {
+        printTerminal("No history available.");
+        return;
+    }
+    const start = Math.max(0, commandHistory.length - 10);
+    for (let i = start; i < commandHistory.length; i++) {
+        printTerminal(`  ${i + 1}  ${commandHistory[i]}`);
+    }
 }
 
 // Main input handler
+let commandHistory = [];
+let historyIndex = -1;
+
 terminalInput.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowUp") {
+        event.preventDefault();
+        if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+        }
+        return;
+    }
+    if (event.key === "ArrowDown") {
+        event.preventDefault();
+        if (historyIndex > 0) {
+            historyIndex--;
+            terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+        } else if (historyIndex === 0) {
+            historyIndex = -1;
+            terminalInput.value = "";
+        }
+        return;
+    }
+
     if (event.key !== "Enter") return;
 
     const raw = terminalInput.value;
@@ -519,41 +649,32 @@ terminalInput.addEventListener("keydown", (event) => {
         return;
     }
 
+    commandHistory.push(command);
+    historyIndex = -1; // reset
+
     // echo the command
     printTerminal("C:\\Users\\Balram> " + command);
     terminalInput.value = "";
 
     const cmd = command.toLowerCase();
 
-    if (cmd === "help") {
-        handleHelp();
-        return;
-    }
-
-    if (cmd === "about") {
-        handleAbout();
-        return;
-    }
-
-    if (cmd === "projects") {
-        handleProjects();
-        return;
-    }
-
-    if (cmd === "skills") {
-        handleSkills();
-        return;
-    }
-
-    if (cmd === "contact") {
-        handleContact();
-        return;
-    }
-
+    if (cmd === "help") return handleHelp();
+    if (cmd === "about") return handleAbout();
+    if (cmd === "projects") return handleProjects();
+    if (cmd === "skills") return handleSkills();
+    if (cmd === "contact") return handleContact();
     if (cmd === "clear") {
         terminalOutput.innerHTML = "";
         return;
     }
+    if (cmd === "whoami") return handleWhoami();
+    if (cmd === "pwd") return handlePwd();
+    if (cmd === "date") return handleDate();
+    if (cmd === "sudo") return handleSudo();
+    if (cmd === "hack") return handleHack();
+    if (cmd === "ls") return handleLs();
+    if (cmd === "neofetch") return handleNeofetch();
+    if (cmd === "history") return handleHistory();
 
     // unknown command
     printTerminal("'" + command + "' is not recognized as an internal or external command.");
@@ -586,6 +707,12 @@ function runCommandFromButton(cmd) {
     printTerminal("C:\\Users\\Balram> " + cmd);
 
     const normalized = cmd.trim().toLowerCase();
+    
+    if (normalized !== "clear" && normalized !== "") {
+        if (typeof commandHistory !== 'undefined') {
+            commandHistory.push(cmd.trim());
+        }
+    }
 
     if (normalized === "help") return handleHelp();
     if (normalized === "about") return handleAbout();
@@ -596,6 +723,14 @@ function runCommandFromButton(cmd) {
         terminalOutput.innerHTML = "";
         return;
     }
+    if (normalized === "whoami") return handleWhoami();
+    if (normalized === "pwd") return handlePwd();
+    if (normalized === "date") return handleDate();
+    if (normalized === "sudo") return handleSudo();
+    if (normalized === "hack") return handleHack();
+    if (normalized === "ls") return handleLs();
+    if (normalized === "neofetch") return handleNeofetch();
+    if (normalized === "history") return handleHistory();
 
     printTerminal("'" + cmd + "' is not recognized as an internal or external command.");
 }

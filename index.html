@@ -8,6 +8,24 @@
 </head>
 <body>
 
+<!-- STARTUP SCREEN -->
+<div id="startup-screen">
+    <div class="startup-content">
+        <h1>Windows XP</h1>
+        <h2>Professional</h2>
+        <div class="loading-bar">
+            <div class="loading-bar-inner"></div>
+        </div>
+    </div>
+</div>
+
+<!-- SHUTDOWN SCREEN -->
+<div id="shutdown-screen" class="hidden">
+    <div class="shutdown-content">
+        <p id="shutdown-text">Windows is shutting down...</p>
+    </div>
+</div>
+
 <!-- DESKTOP CONTAINER (Everything goes inside here) -->
 <div id="desktop">
     <!-- My Projects Window -->
@@ -167,9 +185,49 @@
                 <button class="close">X</button>
             </div>
         </div>
-        <div class="window-content">
-            <h2>My Computer</h2>
-            <p>Your information here</p>
+        <div class="window-content mycomputer-content">
+            <h2 class="sys-title">BALRAM-PC</h2>
+            
+            <fieldset class="sys-section">
+                <legend>SYSTEM</legend>
+                <div class="sys-info">
+                    <div class="sys-row"><span class="sys-label">User:</span> Balrampreet Singh</div>
+                    <div class="sys-row"><span class="sys-label">Role:</span> Cybersecurity Student</div>
+                    <div class="sys-row"><span class="sys-label">Year:</span> 3rd Year B.Tech</div>
+                    <div class="sys-row"><span class="sys-label">Focus:</span> Offensive Security &middot; Network Defense &middot; CTFs</div>
+                </div>
+            </fieldset>
+
+            <fieldset class="sys-section">
+                <legend>LANGUAGES</legend>
+                <div class="sys-info languages-grid">
+                    <span>Python</span> <span class="sys-sep">│</span>
+                    <span>Java</span> <span class="sys-sep">│</span>
+                    <span>Bash</span> <span class="sys-sep">│</span>
+                    <span>HTML</span> <span class="sys-sep">│</span>
+                    <span>CSS</span> <span class="sys-sep">│</span>
+                    <span>JavaScript</span>
+                </div>
+            </fieldset>
+
+            <fieldset class="sys-section">
+                <legend>SECURITY FOCUS</legend>
+                <div class="sys-info">
+                    <div>Web Security</div>
+                    <div>Network Security</div>
+                    <div>CTF Competitions</div>
+                    <div>Blue Team Operations</div>
+                </div>
+            </fieldset>
+
+            <fieldset class="sys-section">
+                <legend>LINKS</legend>
+                <div class="sys-info links-grid">
+                    <a href="https://github.com/Balram-1" target="_blank" rel="noopener noreferrer">[ GitHub ]</a>
+                    <a href="https://www.linkedin.com/in/balrampreet/" target="_blank" rel="noopener noreferrer">[ LinkedIn ]</a>
+                    <a href="mailto:balrampreet@tutamail.com" target="_blank" rel="noopener noreferrer">[ Email ]</a>
+                </div>
+            </fieldset>
         </div>
     </div> <!-- ✅ Closed My Computer window -->
 
@@ -232,30 +290,79 @@
 
     </div>
 
+    <!-- CTF Vault Window -->
+    <!--
+    <div class="window" id="ctfvault-window">
+        <div class="titlebar">
+            <div class="titlebar-left">
+                <img src="assets/icons/cmd.avif" alt="CTF Vault Icon" class="titlebar-icon">
+                <span class="titlebar-title">CTF Vault</span>
+            </div>
+            <div class="titlebar-buttons">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close">X</button>
+            </div>
+        </div>
+        <div class="window-content ctfvault-content">
+            <div class="ctf-header">
+                <h2>CTF Vault</h2>
+                <div class="ctf-stats">
+                    <p><strong>Platform:</strong> TryHackMe</p>
+                    <p><strong>Rooms Completed:</strong> 10+</p>
+                    <p><strong>Focus:</strong> Web exploitation, privilege escalation, reconnaissance</p>
+                </div>
+            </div>
+            
+            <div class="ctf-body">
+                <h3>── Completed Rooms ──────────────</h3>
+                <ul class="ctf-list">
+                    <li><span class="check">✔</span> Basic Pentesting</li>
+                    <li><span class="check">✔</span> OWASP Top 10</li>
+                    <li><span class="check">✔</span> Network Services</li>
+                    <li><span class="check">✔</span> Linux Fundamentals</li>
+                    <li><span class="check">✔</span> Privilege Escalation</li>
+                </ul>
+                
+                <p class="ctf-footer">─────────────────────────────────<br>More write-ups coming soon.</p>
+            </div>
+        </div>
+    </div>
+    -->
+
     <!-- Desktop Icons -->
-    <div class="icon" data-app="mycomputer">
-        <img src="assets/icons/mycomputer.png" alt="My Computer">
-        <span>My Computer</span>
-    </div>
+    <div id="desktop-icons">
+        <div class="icon" data-app="mycomputer">
+            <img src="assets/icons/mycomputer.png" alt="My Computer">
+            <span>My Computer</span>
+        </div>
 
-    <div class="icon" data-app="network">
-        <img src="assets/icons/network.avif" alt="Network">
-        <span>Network</span>
-    </div>
+        <div class="icon" data-app="network">
+            <img src="assets/icons/network.avif" alt="Network">
+            <span>Network</span>
+        </div>
 
-    <div class="icon" data-app="projects">
-        <img src="assets/icons/mydocuments.png" alt="My Project">
-        <span>My Projects</span>
-    </div>
+        <div class="icon" data-app="projects">
+            <img src="assets/icons/mydocuments.png" alt="My Project">
+            <span>My Projects</span>
+        </div>
 
-    <div class="icon" data-app="cmd">
-        <img src="assets/icons/cmd.avif" alt="CLI">
-        <span>Cmd</span>
-    </div>
+        <div class="icon" data-app="cmd">
+            <img src="assets/icons/cmd.avif" alt="CLI">
+            <span>Cmd</span>
+        </div>
 
-    <div class="icon" data-app="guestbook">
-        <img src="assets/icons/guestbook.avif" alt="guestbook">
-        <span>Guestbook</span>
+        <div class="icon" data-app="guestbook">
+            <img src="assets/icons/guestbook.avif" alt="guestbook">
+            <span>Guestbook</span>
+        </div>
+        
+        <!--
+        <div class="icon" data-app="ctfvault">
+            <img src="assets/icons/cmd.avif" alt="CTF Vault">
+            <span>CTF Vault</span>
+        </div>
+        -->
     </div>
 
 </div> <!-- ✅ Closed desktop container -->
@@ -266,6 +373,50 @@
     <div id="startbutton">
         <img src="assets/images/window_logo.png" alt="windows logo">
         <span>start</span>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="hidden">
+        <div class="start-menu-header">
+            <img src="assets/images/profile.png" alt="Profile" class="start-menu-avatar">
+            <span class="start-menu-user">Balrampreet Singh</span>
+        </div>
+        <div class="start-menu-body">
+            <div class="start-menu-strip"></div>
+            <div class="start-menu-items">
+                <div class="start-menu-item" data-app="mycomputer">
+                    <img src="assets/icons/mycomputer.png" alt="My Computer">
+                    <span>My Computer</span>
+                </div>
+                <div class="start-menu-item" data-app="network">
+                    <img src="assets/icons/network.avif" alt="Network">
+                    <span>Network</span>
+                </div>
+                <div class="start-menu-item" data-app="projects">
+                    <img src="assets/icons/mydocuments.png" alt="My Projects">
+                    <span>My Projects</span>
+                </div>
+                <div class="start-menu-item" data-app="cmd">
+                    <img src="assets/icons/cmd.avif" alt="Command Prompt">
+                    <span>Command Prompt</span>
+                </div>
+                <div class="start-menu-item" data-app="guestbook">
+                    <img src="assets/icons/guestbook.avif" alt="Guestbook">
+                    <span>Guestbook</span>
+                </div>
+                <!--
+                <div class="start-menu-item" data-app="ctfvault">
+                    <img src="assets/icons/cmd.avif" alt="CTF Vault">
+                    <span>CTF Vault</span>
+                </div>
+                -->
+                <div class="start-menu-divider"></div>
+                <div class="start-menu-item" id="start-shutdown">
+                    <span class="shutdown-icon">🔴</span>
+                    <span>Shut Down</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="taskbar-apps"></div>
