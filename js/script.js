@@ -14,6 +14,31 @@ window.addEventListener("load", () => {
         }, 2500); // 2.5 seconds loading
     }
 });// ============================================================
+// AUDIO SYSTEM
+// ============================================================
+const clickSound = new Audio('assets/audio/click.mp3');
+
+function playClickSound() {
+    clickSound.currentTime = 0;
+    clickSound.play().catch(err => console.log("Audio blocked by browser:", err));
+}
+
+// Play sound on interactive elements
+document.addEventListener("click", (event) => {
+    const target = event.target;
+    const isInteractive = target.closest('button') || 
+                          target.closest('a') || 
+                          target.closest('.icon') || 
+                          target.closest('.start-menu-item') || 
+                          target.closest('#startbutton') || 
+                          target.closest('.project-tab');
+    
+    if (isInteractive) {
+        playClickSound();
+    }
+});
+
+// ============================================================
 // GLOBAL WINDOW Z-INDEX
 // ============================================================
 
