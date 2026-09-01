@@ -203,34 +203,10 @@ function attachCloseHandler(windowElement) {
 // ============================================================
 
 function attachMaximizeHandler(windowElement) {
-
-    const maximizeButton =
-        windowElement.querySelector(".maximize");
-
+    const maximizeButton = windowElement.querySelector(".maximize");
 
     maximizeButton.addEventListener("click", () => {
-
-        windowElement.classList.toggle("maximized");
-
-
-        if (
-            windowElement.classList.contains("maximized")
-        ) {
-
-            console.log(
-                windowElement.id + " maximized"
-            );
-
-        } else {
-
-            console.log(
-                windowElement.id + " restored"
-            );
-        }
-
-
-        // Keep this window on top
-        bringWindowToFront(windowElement);
+        toggleMaximize(windowElement);
     });
 }
 
@@ -330,15 +306,7 @@ function attachTitlebarDoubleClickHandler(windowElement) {
     const titlebar = windowElement.querySelector(".titlebar");
 
     titlebar.addEventListener("dblclick", () => {
-        windowElement.classList.toggle("maximized");
-
-        bringWindowToFront(windowElement);
-
-        if (windowElement.classList.contains("maximized")) {
-            console.log(windowElement.id + " maximized");
-        } else {
-            console.log(windowElement.id + " restored");
-        }
+        toggleMaximize(windowElement);
     });
 }
 
@@ -368,6 +336,33 @@ function initializeWindow(windowElement, label) {
     // Double-click titlebar to maximize/restore
     attachTitlebarDoubleClickHandler(windowElement);
 }
+
+
+
+
+
+function toggleMaximize(windowElement) {
+    if (!windowElement.classList.contains("maximized")) {
+        // Save current position before maximizing
+        windowElement.previousLeft = windowElement.offsetLeft;
+        windowElement.previousTop = windowElement.offsetTop;
+
+        windowElement.classList.add("maximized");
+        console.log(windowElement.id + " maximized");
+    } else {
+        // Restore to previous position
+        windowElement.classList.remove("maximized");
+
+        windowElement.style.left = windowElement.previousLeft + "px";
+        windowElement.style.top = windowElement.previousTop + "px";
+
+        console.log(windowElement.id + " restored");
+    }
+
+    bringWindowToFront(windowElement);
+}
+
+
 
 
 // ============================================================
