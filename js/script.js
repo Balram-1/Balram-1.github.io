@@ -405,6 +405,14 @@ const cmdWindow =
     document.querySelector("#cmd-window");
 initializeWindow(cmdWindow, "Command Prompt");
 
+//Guestbook
+const guestbookWindow =
+    document.querySelector("#guestbook-window");
+
+initializeWindow(
+    guestbookWindow,
+    "Guestbook"
+);
 
 
 

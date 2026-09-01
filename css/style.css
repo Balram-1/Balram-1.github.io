@@ -369,3 +369,41 @@ body{
 .terminal-content.scrolled-to-bottom {
     scroll-behavior: smooth;
 }
+/* Guestbook window content */
+.guestbook-content {
+    background-color: #fff;
+    padding: 20px;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    line-height: 1.4;
+}
+
+/* Heading */
+.guestbook-content h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #000080; /* XP blue */
+}
+
+/* Paragraphs */
+.guestbook-content p {
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Guestbook button */
+.guestbook-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 6px 12px;
+    background-color: #d4d0c8; /* XP gray */
+    border: 2px solid #808080;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.guestbook-button:hover {
+    background-color: #cce5ff; /* XP highlight */
+    border-color: #0055aa;
+}
