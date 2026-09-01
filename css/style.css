@@ -134,17 +134,18 @@ body{
 }
 
 
-.window{
-    position:absolute;
-    top:110px;
-    left:70px;
-    width:500px;
-    height:300px;
+.window {
+    position: absolute;
+    top: 110px;
+    left: 70px;
+    width: 500px;
+    min-height: 300px;   /* minimum size, but grows with content */
     border: 2px solid #000;
     background-color: white;
     z-index: 10;
     display: none;
 }
+
 .window.open{
     display: block;
 }
@@ -206,4 +207,165 @@ body{
 
 .taskbar-button:hover {
   background: #c0c0c0;
+}
+
+.profile-header{
+    display: flex;
+    align-items: center;
+    gap:15px;
+}
+
+.profile-image{
+    width:80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.profile-info h2{
+    margin: 0;
+    font-size: 18px;
+}
+
+.profile-info p {
+    margin-top: 5px;            /* small gap below name */
+    font-size: 14px;            /* smaller subtitle */
+    color: #333;                /* darker text for readability */
+}
+
+/* Each section (About, Skills, Currently, Education) */
+.profile-section {
+    margin-top: 15px;           /* space between sections */
+}
+
+.profile-section h3 {
+    margin-bottom: 5px;         /* space below heading */
+    font-size: 16px;
+    color: #0055aa;             /* matches XP blue for headings */
+}
+
+.profile-section p {
+    margin: 0;                  /* keep paragraphs tight */
+    line-height: 1.4;           /* improve readability */
+}
+/* Tabs row */
+.project-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.project-tab {
+    padding: 5px 12px;
+    cursor: pointer;
+    background: #d4d0c8;          /* XP-style gray */
+    border: 2px solid #808080;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 14px;
+}
+
+.project-tab.active {
+    background: #cce5ff;          /* highlight active tab */
+    border-color: #0055aa;        /* XP blue border */
+    font-weight: bold;
+}
+
+/* Project content visibility */
+.project {
+    display: none;
+}
+
+.project.active {
+    display: block;
+}
+
+/* Project headings */
+.project h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #000;
+}
+
+.project h3 {
+    margin: 15px 0 5px 0;
+    font-size: 16px;
+    color: #0055aa;               /* XP blue for subheadings */
+}
+
+/* Project meta (technologies list) */
+.project-meta {
+    margin-top: 10px;
+}
+
+.project-meta span {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 2px 6px;
+    background: #f0f0f0;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* Project links (GitHub, Demo) */
+.project-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.project-links a {
+    display: inline-block;
+    padding: 5px 12px;
+    border: 1px solid #000;
+    background-color: #eeeeee;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.project-links a:hover {
+    background-color: #dddddd;
+    border-color: #0055aa;
+}
+.terminal-content {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    height: 260px;
+    overflow-y: auto;
+    font-family: "Courier New", monospace;
+    box-sizing: border-box;
+}
+
+.terminal-output p {
+    margin: 2px 0;
+    white-space: pre-wrap;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.terminal-prompt {
+    white-space: nowrap;
+    margin-right: 8px;
+    color: #9cdcfe;
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+}
+
+
+/* keep the terminal scroll anchored to bottom when new lines are added */
+.terminal-content.scrolled-to-bottom {
+    scroll-behavior: smooth;
 }

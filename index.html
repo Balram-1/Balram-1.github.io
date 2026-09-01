@@ -10,6 +10,123 @@
 
 <!-- DESKTOP CONTAINER (Everything goes inside here) -->
 <div id="desktop">
+    <!-- My Projects Window -->
+<!-- My Projects Window -->
+<div class="window" id="projects-window">
+    <div class="titlebar">
+        <div class="titlebar-left">
+            <img src="assets/icons/mydocuments.png" alt="Projects Icon" class="titlebar-icon">
+            <span class="titlebar-title">My Projects</span>
+        </div>
+        <div class="titlebar-buttons">
+            <button class="minimize">_</button>
+            <button class="maximize">□</button>
+            <button class="close">X</button>
+        </div>
+    </div>
+
+    <div class="window-content">
+        <div class="project-tabs">
+            <button class="project-tab active" data-project="project1">StegoForge</button>
+            <button class="project-tab" data-project="project2">E‑commerce</button>
+            <button class="project-tab" data-project="project3">PPTX‑Merger</button>
+        </div>
+
+        <div class="project-content">
+            <!-- Project 1 -->
+            <div class="project active" id="project1">
+                <h2>StegoForge</h2>
+                <p>A Python-based steganography tool for hiding and extracting information from digital images.</p>
+
+                <h3>Technologies</h3>
+                <div class="project-meta">
+                    <strong>Technologies:</strong>
+                    <span>Python</span>
+                    <span>Cryptography</span>
+                    <span>CLI</span>
+                </div>
+
+                <div class="project-links">
+                    <a href="https://github.com/Balram-1/stegolab" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project" id="project2">
+                <h2>E‑commerce (AETHER)</h2>
+                <p>A premium urban‑streetwear storefront featuring a glassmorphic UI and modular design for a seamless shopping experience.</p>
+
+                <h3>Technologies</h3>
+                <div class="project-meta">
+                    <strong>Technologies:</strong>
+                    <span>JavaScript</span>
+                    <span>UI/UX</span>
+                    <span>Frontend</span>
+                </div>
+
+                <div class="project-links">
+                    <a href="https://github.com/Balram-1/E-commerce" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project" id="project3">
+                <h2>PPTX‑Merger</h2>
+                <p>A simple tool to merge multiple PowerPoint presentations into one file.</p>
+
+                <h3>Technologies</h3>
+                <div class="project-meta">
+                    <strong>Technologies:</strong>
+                    <span>HTML</span>
+                    <span>JavaScript</span>
+                </div>
+
+                <div class="project-links">
+                    <a href="https://github.com/Balram-1/PPTX-MERGER" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Command Prompt Window -->
+<div class="window" id="cmd-window">
+    <div class="titlebar">
+        <div class="titlebar-left">
+            <img src="assets/icons/cmd.avif" alt="Command Prompt" class="titlebar-icon">
+            <span class="titlebar-title">Command Prompt</span>
+        </div>
+        <div class="titlebar-buttons">
+            <button class="minimize">_</button>
+            <button class="maximize">□</button>
+            <button class="close">X</button>
+        </div>
+    </div>
+
+    <div class="terminal-content">
+        <!-- Output area -->
+        <div class="terminal-output">
+            <p>Microsoft Windows [Version 5.1.2600]</p>
+            <p>(C) Copyright Microsoft Corp.</p>
+            <br>
+            <p>Type <strong>help</strong> to see available commands.</p>
+        </div>
+
+        <!-- Input line -->
+        <div class="terminal-input-line">
+            <span class="terminal-prompt">C:\Users\Balram&gt;</span>
+            <input 
+                type="text" 
+                class="terminal-input" 
+                autocomplete="off" 
+                spellcheck="false"
+            >
+        </div>
+    </div>
+</div>
+
+
+
 
     <!-- My Computer Window -->
     <div class="window" id="mycomputer-window">

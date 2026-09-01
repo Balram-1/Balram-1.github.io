@@ -390,3 +390,204 @@ initializeWindow(
     networkWindow,
     "Network"
 );
+
+// Projects
+const projectsWindow =
+    document.querySelector("#projects-window");
+
+initializeWindow(
+    projectsWindow,
+    "My Projects"
+);
+
+// Command Prompt
+const cmdWindow =
+    document.querySelector("#cmd-window");
+initializeWindow(cmdWindow, "Command Prompt");
+
+
+
+
+// ============================================================
+// PROJECT TABS
+// ============================================================
+
+const projectTabs =
+    document.querySelectorAll(".project-tab");
+
+const projects =
+    document.querySelectorAll(".project");
+
+for (const tab of projectTabs) {
+
+    tab.addEventListener("click", () => {
+
+        const projectId = tab.dataset.project;
+
+        console.log("Opening project:", projectId);
+
+        // Remove active from every tab
+        for (const t of projectTabs) {
+            t.classList.remove("active");
+        }
+
+        // Remove active from every project
+        for (const p of projects) {
+            p.classList.remove("active");
+        }
+
+        // Activate clicked tab
+        tab.classList.add("active");
+
+        // Find matching project
+        const selectedProject = document.querySelector("#" + projectId);
+
+        // Show selected project
+        if (selectedProject) {
+            selectedProject.classList.add("active");
+        }
+
+    });
+
+}
+
+// ============================================================
+// TERMINAL
+// ============================================================
+
+const terminalInput = document.querySelector(".terminal-input");
+const terminalOutput = document.querySelector(".terminal-output");
+
+// Utility: print a line to the terminal
+function printTerminal(text) {
+    const line = document.createElement("p");
+    line.textContent = text;
+    terminalOutput.appendChild(line);
+    // keep scroll at bottom
+    terminalOutput.parentElement.classList.add("scrolled-to-bottom");
+    terminalOutput.parentElement.scrollTop = terminalOutput.parentElement.scrollHeight;
+}
+
+// Command handlers
+function handleHelp() {
+    printTerminal("Available commands:");
+    printTerminal("  about");
+    printTerminal("  projects");
+    printTerminal("  skills");
+    printTerminal("  contact");
+    printTerminal("  clear");
+}
+
+function handleAbout() {
+    printTerminal("Balrampreet Singh — Cybersecurity student focused on offensive security, network defense and CTFs.");
+}
+
+function handleProjects() {
+    printTerminal("Projects:");
+    printTerminal("  StegoForge  - steganography analysis tool  - GitHub: https://github.com/Balram-1/stegolab");
+    printTerminal("  E-commerce  - AETHER storefront UI         - GitHub: https://github.com/Balram-1/E-commerce");
+    printTerminal("  PPTX-MERGER - Merge PowerPoint files       - GitHub: https://github.com/Balram-1/PPTX-MERGER");
+}
+
+function handleSkills() {
+    printTerminal("Skills: Python • Java • Bash • HTML • CSS • JavaScript • Web Security");
+}
+
+function handleContact() {
+    printTerminal("Contact:");
+    printTerminal("  GitHub: https://github.com/Balram-1");
+    printTerminal("  Email: your-email@example.com");
+    printTerminal("  LinkedIn: https://www.linkedin.com/in/your-profile");
+}
+
+// Main input handler
+terminalInput.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+
+    const raw = terminalInput.value;
+    const command = raw.trim();
+    if (command === "") {
+        terminalInput.value = "";
+        return;
+    }
+
+    // echo the command
+    printTerminal("C:\\Users\\Balram> " + command);
+    terminalInput.value = "";
+
+    const cmd = command.toLowerCase();
+
+    if (cmd === "help") {
+        handleHelp();
+        return;
+    }
+
+    if (cmd === "about") {
+        handleAbout();
+        return;
+    }
+
+    if (cmd === "projects") {
+        handleProjects();
+        return;
+    }
+
+    if (cmd === "skills") {
+        handleSkills();
+        return;
+    }
+
+    if (cmd === "contact") {
+        handleContact();
+        return;
+    }
+
+    if (cmd === "clear") {
+        terminalOutput.innerHTML = "";
+        return;
+    }
+
+    // unknown command
+    printTerminal("'" + command + "' is not recognized as an internal or external command.");
+});
+
+
+// ============================================================
+// BUTTON HANDLERS (Projects + Terminal)
+// ============================================================
+
+// External links (GitHub, Demo) — open safely in new tab
+document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-external]");
+    if (a) {
+        e.preventDefault();
+        window.open(a.href, "_blank", "noopener,noreferrer");
+        return;
+    }
+
+    // Terminal command buttons
+    const btn = e.target.closest("[data-cmd]");
+    if (btn) {
+        const cmd = btn.dataset.cmd;
+        if (cmd) runCommandFromButton(cmd);
+    }
+});
+
+// Helper: run a command as if typed in terminal
+function runCommandFromButton(cmd) {
+    printTerminal("C:\\Users\\Balram> " + cmd);
+
+    const normalized = cmd.trim().toLowerCase();
+
+    if (normalized === "help") return handleHelp();
+    if (normalized === "about") return handleAbout();
+    if (normalized === "projects") return handleProjects();
+    if (normalized === "skills") return handleSkills();
+    if (normalized === "contact") return handleContact();
+    if (normalized === "clear") {
+        terminalOutput.innerHTML = "";
+        return;
+    }
+
+    printTerminal("'" + cmd + "' is not recognized as an internal or external command.");
+}
